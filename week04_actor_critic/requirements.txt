@@ -1,0 +1,5 @@
+# Week 4 — Actor-Critic and Safe RL
+# On Google Colab, torch is preinstalled — this line is a no-op there.
+numpy>=1.26
+matplotlib>=3.8
+torch>=2.2
