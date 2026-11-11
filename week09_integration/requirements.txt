@@ -1,0 +1,5 @@
+# Week 09 - System Integration (mini-project)
+# Same stack as week 07: robosuite only (no torch needed for Track A).
+numpy>=1.26,<2.0
+robosuite==1.5.2
+mujoco>=3.3,<3.5
