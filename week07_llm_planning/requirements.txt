@@ -1,0 +1,8 @@
+# Week 07 - LLM Task Planning on a Robot Skill API
+#
+# robosuite 1.5.2 pins mujoco>=3.3.0 but is only tested with mujoco < 3.5
+# (the qM -> M rename in newer MuJoCo breaks its OSC controller).
+# mink==0.0.5 (a robosuite dependency) requires numpy < 2.
+numpy>=1.26,<2.0
+robosuite==1.5.2
+mujoco>=3.3,<3.5
