@@ -1,0 +1,4 @@
+# Week 1 — MDPs and Bandits
+# Pure NumPy + Matplotlib (GPU-ready NumPy via CuPy is optional, only for the benchmark)
+numpy>=1.26
+matplotlib>=3.8
