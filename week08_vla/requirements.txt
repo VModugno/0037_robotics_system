@@ -1,0 +1,12 @@
+# Week 08 - Vision-Language-Action models
+#
+# robosuite 1.5.2 pins mujoco>=3.3.0 but is only tested with mujoco < 3.5
+# (the qM -> M rename in newer MuJoCo breaks its OSC controller).
+# mink==0.0.5 (a robosuite dependency) requires numpy < 2.
+# VLA Foundry itself is NOT pip-installable (git + uv, Python 3.12,
+# >=16 GB VRAM) -- see evaluate_vla.py / LAB.md for the Colab/server track.
+numpy>=1.26,<2.0
+torch>=2.2
+robosuite==1.5.2
+mujoco>=3.3,<3.5
+h5py>=3.10
