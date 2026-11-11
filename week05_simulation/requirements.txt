@@ -1,0 +1,5 @@
+numpy>=1.26
+matplotlib>=3.8
+mujoco>=3.13
+mujoco-warp>=4.0
+warp-lang>=1.15
