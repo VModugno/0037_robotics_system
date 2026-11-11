@@ -1,0 +1,80 @@
+[workspace]
+name = "comp0037-labs"
+version = "0.1.0"
+description = "COMP0037 lab sessions: reinforcement learning, VLM/VLA models, and robot learning"
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64"]
+
+# Base dependencies inherited by every weekly environment.
+[dependencies]
+python = ">=3.11,<3.13"
+numpy = ">=1.26"
+
+# On Windows the pypi torch wheel bundles libiomp5md.dll while conda-forge
+# numpy/scipy load MKL's libomp.dll — two OpenMP runtimes in one process abort
+# with "OMP Error #15". This standard switch makes `pixi run -e week03/04`
+# work out of the box (harmless on Linux and in non-torch environments).
+# PYTHONUTF8: Windows consoles default to cp1252 and crash on the Unicode
+# policy arrows printed by week02's renderer.
+[activation.env]
+KMP_DUPLICATE_LIB_OK = "TRUE"
+PYTHONUTF8 = "1"
+
+# ── Weeks 01–02: pure Python + NumPy (bandits, MDPs, tabular RL) ──────────────
+[feature.core.dependencies]
+matplotlib = ">=3.8"
+
+# ── Weeks 03–04: PyTorch (DQN, Actor-Critic) ──────────────────────────────────
+[feature.torch.dependencies]
+matplotlib = ">=3.8"
+
+[feature.torch.pypi-dependencies]
+torch = ">=2.2"
+
+# ── Optional GPU-ready NumPy (CuPy) for the Week 01/02 vectorised experiments ─
+# Activate with:  pixi run -e gpu python week01_bandits/bandits.py --bench --gpu
+[feature.cupy.pypi-dependencies]
+cupy-cuda12x = ">=13"
+
+# ── Week 05: MuJoCo + MuJoCo Warp simulator benchmarking ─────────────────────
+# mujoco-warp is pure-python on top of warp-lang; it runs on CPU (warp device
+# "cpu") for development and on CUDA when a GPU is present. Linux/Colab CUDA
+# driver notes live in week05_simulation/LAB.md (warp +cu12 wheel pin).
+[feature.sim.dependencies]
+matplotlib = ">=3.8"
+
+[feature.sim.pypi-dependencies]
+mujoco = ">=3.13"
+mujoco-warp = ">=4.0"
+warp-lang = ">=1.15"
+
+# ── Weeks 06–09: robosuite (+ torch where policies are trained) ───────────────
+# robosuite 1.5.2 is validated against MuJoCo 3.x, so keep mujoco <4 in these
+# environments while week05 tracks the latest 4.x line. numba, opencv-python,
+# mink, qpsolvers arrive transitively. numpy <2 because robosuite pins
+# mink==0.0.5, whose metadata requires numpy<2. Python pinned to 3.11 for
+# numba wheel availability. Windows users: create C:\tmp before the first
+# robosuite run (see week06 LAB.md, Troubleshooting).
+[feature.robosuite.dependencies]
+python = ">=3.11,<3.12"
+numpy = "<2.0"
+matplotlib = ">=3.8"
+h5py = ">=3.10" # conda-forge build (native HDF5); also a robomimic-format lab dependency
+
+[feature.robosuite.pypi-dependencies]
+robosuite = "==1.5.2"
+mujoco = ">=3.3,<3.5" # robosuite 1.5.2 accesses pre-3.5 mjData field names (e.g. data.qM); pypi wheel layout (mujoco.dll inside the package dir) is what its binding_utils loads via ctypes
+
+# ── Weekly environments ───────────────────────────────────────────────────────
+# Run a lab with:   pixi run -e week01 python week01_bandits/bandits.py
+[environments]
+week01 = ["core"]
+week02 = ["core"]
+week03 = ["torch"]
+week04 = ["torch"]
+gpu = ["core", "cupy"]
+week05 = ["sim"]
+week06 = ["torch", "robosuite"]
+week07 = ["robosuite"]
+week08 = ["torch", "robosuite"]
+week09 = ["torch", "robosuite"]
