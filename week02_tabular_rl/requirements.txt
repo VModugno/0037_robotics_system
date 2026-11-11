@@ -1,0 +1,3 @@
+# Week 2 — Tabular Model-Free RL
+numpy>=1.26
+matplotlib>=3.8
