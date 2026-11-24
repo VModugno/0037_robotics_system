@@ -116,21 +116,21 @@ The rendered greedy policies: **Q-Learning takes the optimal 13-step path along 
 | 0.7 | −43.6 |
 | 1.0 | −42.0 |
 
-*Exact* numbers depend on the order in which your T1 consumes RNG draws (our reference draws `rng.random()` every step, then `rng.integers()` only on explore; `argmax` ties break to the first index, i.e. UP). If your values are within a few units of the table above and show the same pattern, you are done — say so in your report and explain any deviation.
+*Exact* numbers depend on the order in which your T1 consumes RNG draws (our reference draws `rng.random()` every step, then `rng.integers()` only on explore; `argmax` ties break to the first index, i.e. UP). If your values are within a few units of the table above and show the same pattern, you are done — record any deviation in your notes.
 
 Wall-clock: ~2.3 s for the whole lab on a typical laptop.
 
 ---
 
-## 6. Report (deliverables & questions)
+## 6. Deliverables & Discussion Questions
 
-Write a short report (≤ 6 pages, PDF) with:
+Record your experimental findings and answer the following questions in your lab notes:
 
-**Deliverables**
+**Deliverables checklist**
 - [ ] Your completed `agents.py`.
-- [ ] `warehouse_learning.png` and `cliff_learning.png`, referenced and discussed.
+- [ ] `warehouse_learning.png` and `cliff_learning.png` saved in `week02_tabular_rl/`.
 - [ ] The α-sweep table (yours) plus the two policy ASCII renders from Exp 2.
-- [ ] Answers to Q1–Q6.
+- [ ] Answers to Q1–Q6 below.
 - [ ] **Reproducibility block:** commands, seeds (defaults: 1, 2, 3), library versions, local vs Colab.
 
 **Questions**
@@ -141,7 +141,7 @@ Write a short report (≤ 6 pages, PDF) with:
 - **Q5 — The sentinel.** `train` passes `a2 = -1` when the episode is done. What exact bug would you have introduced in T3 if you forgot the `done` guard and used `Q[s2_idx, a2]`? (Check what NumPy does with a negative index.) Why does the same mistake NOT crash but silently corrupt learning?
 - **Q6 — Warehouse.** Why is the Q-Learning/Sarsa difference so small on the warehouse compared to the cliff? Identify the structural features of each MDP that make risk matter.
 
-**Report rules:** as Week 01 — every plot claim checkable by eye, seeds and commands stated, deviations reported honestly.
+**Scientific rigor:** as Week 01 — every plot claim checkable by eye, seeds and commands stated, deviations recorded honestly.
 
 ---
 

@@ -183,7 +183,7 @@ class A2CAgent:
             rew_list.append(r)
             # 'done' for learning is TRUE only on success (termination);
             # a time limit is a truncation — the episode's return just stops,
-            # the MDP itself continues (same subtlety as Week 03, report Q4).
+            # the MDP itself continues (same subtlety as Week 03, discussion Q4).
             done_list.append(float(info["success"]))
             ep_ret += r
             obs = nobs

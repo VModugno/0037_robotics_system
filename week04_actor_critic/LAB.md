@@ -39,7 +39,7 @@ Flags: `--episodes N` (default 400), `--device cpu|cuda|auto`, `--show`. The run
 %run week04_actor_critic/actor_critic.py
 ```
 
-CPU is fine; a GPU runtime changes little at this scale (say so in your report if you tried).
+CPU is fine; a GPU runtime changes little at this scale (note this in your findings if you tried).
 
 ---
 
@@ -96,9 +96,11 @@ Wall-clock ≈ 50 s total on one CPU core.
 
 ---
 
-## 6. Report (deliverables & questions)
+## 6. Deliverables & Discussion Questions
 
-**Deliverables**
+Record your experimental findings and answer the following questions in your lab notes:
+
+**Deliverables checklist**
 - [ ] Completed `actor_critic.py`.
 - [ ] `a2c_comparison.png` with a caption per panel.
 - [ ] Console logs of both runs (400 eps + your 150-eps comparison).
@@ -113,7 +115,7 @@ Wall-clock ≈ 50 s total on one CPU core.
 - **Q5 — Why park?** Explain the unsafe run's 0.8 → 133 hits/ep growth: connect the target distribution (radius up to 0.7 m) to the arm's reach (0.8 m) and the per-step reward shape. Why is limit-parking rational for the unconstrained learner?
 - **Q6 — Free safety?** The shielded run ends with *better* return (−96 vs −112) and zero clamps. Give at least two mechanisms (e.g., the smoothness prior imposed near limits; the −0.01‖ω‖² action cost interacting with saturation; evaluation noise). Then discuss the greedy success numbers: both configs end at 0/10 — what does that say about evaluating a *stochastic* training regime with *greedy* rollouts, and which metric (return? hits? success?) would you defend as the primary one here and why?
 
-**Report rules:** as before — claims checkable against plots/logs, seeds and commands stated, deviations reported honestly.
+**Scientific rigor:** claims checkable against plots/logs, seeds and commands stated, deviations recorded honestly.
 
 ---
 

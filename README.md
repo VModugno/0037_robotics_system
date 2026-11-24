@@ -2,9 +2,8 @@
 
 Nine lab sessions, one folder per week, matching the module's tentative
 schedule. Every week has the same shape: a `LAB.md` (what to do, experiments,
-self-check with reference numbers, and a **detailed report section** — the
-report is the graded deliverable) plus one or more `.py` files with `TODO`
-blocks you implement. Simpler labs run on CPU with numpy; the RL/VLA labs use
+self-check with reference numbers, and a **deliverables & discussion section**)
+plus one or more `.py` files with `TODO` blocks you implement. Simpler labs run on CPU with numpy; the RL/VLA labs use
 PyTorch; weeks 5–9 use MuJoCo / MuJoCo Warp / robosuite / VLA Foundry.
 
 ## Index
@@ -60,34 +59,24 @@ Every `LAB.md` has a ready Colab section. The short version:
    `warp-lang==1.18.0`), then check `wp.get_device()` says `cuda:0`.
 5. **Week 6–9 (robosuite)** — set `MUJOCO_GL=egl` *before* importing
    robosuite when collecting images (week 8); everything else runs headless
-   without it.
+   without it. **Note:** Week 5 (`mujoco-warp`, MuJoCo ≥ 3.5) and Weeks 6–9
+   (`robosuite==1.5.2`, MuJoCo 3.4) require incompatible MuJoCo versions — use
+   a fresh Colab runtime (or uninstall `mujoco`/`mujoco-warp`, remove the
+   `mujoco` package folder, reinstall `numpy==1.26.4 mujoco==3.4.0 robosuite==1.5.2`,
+   and restart the session) when moving from Week 5 to Weeks 6–9.
 6. **Week 8 Track B (VLA Foundry)** — Colab/server with a ≥16 GB GPU only:
    Foundry installs via git + `uv` (Python 3.12), is not pip-installable, and
    needs `amp` (not `amp_bf16`) precision on T4s. The LAB.md spells out the
    recipe; Tracks A (local) and B (GPU) are separate.
 
-## Reports (every week, same rules)
+## Deliverables & Self-Assessment (every week, same rules)
 
-Each `LAB.md` ends with a report section: deliverables checklist, plots to
-include, week-specific questions, and a mandatory reproducibility block
-(machine, env, exact commands, seeds). Reference numbers quoted in the
-"Self-check" sections are from seeded runs on the instructor machine — treat
-them as sanity anchors, not targets to reproduce digit-for-digit (several
-labs note where RNG conventions can shift decimals).
-
-## Instructor solutions
-
-`solutions/` contains one reference module per week (`weekNN_*_solutions.py`):
-the TODO implementations plus a runner that exercises the lab end-to-end. Run
-from inside the week folder, e.g.
-
-```bash
-cd week09_integration
-pixi run --manifest-path ../pixi.toml -e week09 python ../solutions/week09_integration_solutions.py all
-```
-
-The numbers printed by the solutions runners are the source of the LAB.md
-self-check tables. **Instructor-only** — do not ship to students.
+Each `LAB.md` ends with a deliverables and discussion section: checklist of
+artifacts, plots to generate, week-specific analysis questions, and a
+reproducibility block (machine, env, exact commands, seeds). Reference
+numbers quoted in the "Self-check" sections are from seeded runs on the
+instructor machine — treat them as sanity anchors, not targets to reproduce
+digit-for-digit (several labs note where RNG conventions can shift decimals).
 
 ## Toolchain notes & troubleshooting
 

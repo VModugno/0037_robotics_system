@@ -100,14 +100,14 @@ Notes that matter:
   CBF lesson of the week in one plot.
 - **E4 — planner fallback.** Feed a nonsense task (`--task "make me a coffee"`).
   The mock planner falls back to the dangerous plan — on purpose. Show that the
-  system survives an unhelpful planner, and report why the fallback design is
+  system survives an unhelpful planner, and discuss why the fallback design is
   "dangerous-but-safe" rather than "harmless".
 - **E5 — reporting.** `--json-out results.json` on your best run; the reasons
-  list is your audit trail — include the clamp messages in the report.
+  list is your audit trail — inspect the clamp messages.
 
 ## 5. Self-check (reference run, seed 0, CPU)
 
-Instructor solutions (`solutions/week09_integration_solutions.py`, stage `all`):
+Reference implementation output (all stages):
 
 ```
 -- stage: selftest ----------------------------------------
@@ -154,9 +154,11 @@ Runtime: ~40 s for the whole stage-`all` run (7 episodes + self-test) on CPU.
 Exact step counts vary with the cube placement seed; the pattern
 (pick clean / slam blocked / unsafe slam misses) is the invariant.
 
-## 6. Report
+## 6. Deliverables & Discussion Questions
 
-Deliverables (checklist):
+Record your experimental findings and answer the following questions in your lab notes:
+
+**Deliverables checklist**
 
 - [ ] `safety_filter.py` self-test output.
 - [ ] The three comparison tables (pick ON, slam ON, slam OFF) — copy-paste
@@ -174,7 +176,7 @@ Questions:
   implementation preserves (state constraint vs one-step reachability).
 - **Q2** — The near-miss counter fires on the *commanded* target even though
   the filter guarantees the executed target is safe. Why is monitoring the
-  command the right quantity for a safety report? What would you log in a
+  command the right quantity for a safety audit? What would you log in a
   real deployment (think: an operator reading this dashboard).
 - **Q3** — The `slam` plan "completes" with the filter ON (last skill `wait`,
   18 steps) and "fails" with the filter OFF (`MISSED`, 60 steps). Which
@@ -192,7 +194,7 @@ Questions:
   plausible-but-useless mock plan) and explain how this pipeline's layering
   (planner → skills → filter) would or would not contain it.
 
-Reproducibility block (mandatory in your report):
+Reproducibility block:
 
 ```
 machine / OS / CPU:

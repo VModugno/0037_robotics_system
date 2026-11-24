@@ -22,7 +22,7 @@ how sim-to-real robustness is trained.
 2. Explain latency vs throughput: why 1 GPU world loses to CPU but 1000 win.
 3. Read the MuJoCo Warp data model (`put_model`, `make_data`, `Data.qpos`).
 4. Set up domain randomization over batched physics parameters.
-5. Argue when to pick MuJoCo / MJX / MuJoCo Warp (see report Q6).
+5. Argue when to pick MuJoCo / MJX / MuJoCo Warp (see discussion Q6).
 
 ## 2. Setup
 
@@ -54,7 +54,7 @@ print(wp.get_device())   # must print cuda:0 - if it says cpu, the GPU path belo
 ```
 
 Then upload the `week05_simulation/` folder and run the three scripts.
-**Every timing number in your report must state the device it ran on.**
+**Every timing number in your lab notes must state the device it ran on.**
 
 ## 3. Your tasks (TODO map)
 
@@ -121,7 +121,9 @@ Parts B/C sanity signals:
   with the default ranges — if it is ~0, your T5 sampling never varied the
   hinge damping (check that `dampings[:, HINGE_DOF]` actually changes).
 
-## 6. Report
+## 6. Deliverables & Discussion Questions
+
+Record your experimental findings and answer the following questions in your lab notes:
 
 **Deliverables checklist**
 
@@ -146,7 +148,7 @@ Parts B/C sanity signals:
 - **Q4 (fixed buffers).** `make_data` allocates fixed-size contact buffers
   (`nconmax`, `njmax`). Explain what `Data.overflow` would tell you, and why
   MuJoCo Warp prefers fixed-size buffers over dynamic allocation on GPU.
-- **Q5 (DR spread).** Report start vs final pole-angle std from Part C.
+- **Q5 (DR spread).** Compare start vs final pole-angle std from Part C.
   How would you turn the measured spread into a *training* distribution for
   a policy (what to randomize, how wide, and why log-uniform damping)?
 - **Q6 (engine choice).** MJX (JAX) is differentiable and TPU-friendly;
@@ -157,7 +159,7 @@ Parts B/C sanity signals:
 **Reproducibility block** — state for every number: machine (CPU/GPU model),
 device (`cpu`/`cuda:0`), command line incl. flags, and the seed. The scripts
 default to seed 0 for T2/T5 sampling; timing runs are inherently noisy, so
-report best-of-5 (Part A) and single-run (Part B) numbers with that caveat.
+record best-of-5 (Part A) and single-run (Part B) numbers with that caveat.
 
 ## 7. Going further
 

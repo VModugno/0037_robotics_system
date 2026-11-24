@@ -334,7 +334,7 @@ def bench(use_gpu: bool) -> None:
     """Measure when 'GPU-ready numpy' actually pays off (COMPLETE).
 
     Runs the vectorised experiment at a small and a large batch size and
-    prints throughput. Discuss the numbers in your report — the GPU is not
+    prints throughput. Discuss the numbers in your lab notes — the GPU is not
     automatically faster; per-step launch overhead dominates small problems.
     """
     xp, name = get_xp(use_gpu)

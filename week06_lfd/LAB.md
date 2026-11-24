@@ -132,10 +132,10 @@ pixi run --manifest-path ../pixi.toml -e week06 python airl.py \
     --iterations 20
 ```
 
-Then run the **experiments for the report**:
+Then run the **analysis experiments**:
 
 - **E1 — expert quality.** How does the expert success rate change with
-  `GRIP_STEPS` (40 → 20, 80)? With `TOL` (0.02 → 0.01, 0.04)? Report rates.
+  `GRIP_STEPS` (40 → 20, 80)? With `TOL` (0.02 → 0.01, 0.04)? Record rates.
 - **E2 — dataset size.** Re-train BC with 5 / 10 / 20 demos
   (`--episodes` at collection time; keep the BC flags fixed). Plot
   closed-loop success vs number of demos.
@@ -187,11 +187,11 @@ finding (see Q6).
 
 ---
 
-## 6. Report
+## 6. Deliverables & Discussion Questions
 
-Produce a short report (see `../README.md` for the common rules). Include:
+Record your experimental findings and answer the following questions in your lab notes:
 
-**Deliverables**
+**Deliverables checklist**
 
 - [ ] `demos/lift_demos.hdf5` (raw) and `demos/lift_demos_obs.hdf5` sizes +
       episode counts

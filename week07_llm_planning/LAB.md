@@ -158,9 +158,11 @@ If `TASK FAILED` appears: check the executor printout — the usual causes are
 a `descend_to_cube` target at the wrong height (T3 should not have caught
 it; T2 might have mis-parsed) or a plan that closes the gripper too early.
 
-## 6. Report
+## 6. Deliverables & Discussion Questions
 
-Deliverables (checklist):
+Record your experimental findings and answer the following questions in your lab notes:
+
+**Deliverables checklist**
 
 - [ ] console output of E1–E5 (and E6 if attempted), annotated;
 - [ ] the exact system prompt you built in T1 (quote it) and a short

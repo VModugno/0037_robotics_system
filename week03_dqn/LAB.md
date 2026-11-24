@@ -41,7 +41,7 @@ First run downloads PyTorch (~200 MB one-off). The pixi environment also sets th
 %run week03_dqn/dqn.py --episodes 300
 ```
 
-The DQN is tiny (6→128→128→9); CPU is fine, but try `--device cuda` once and report the speed difference in Q7.
+The DQN is tiny (6→128→128→9); CPU is fine, but try `--device cuda` once and record the speed difference for Q7.
 
 ---
 
@@ -112,9 +112,11 @@ Honest note: the post-training showcase episode (`seed=123`, printed at the end)
 
 ---
 
-## 6. Report (deliverables & questions)
+## 6. Deliverables & Discussion Questions
 
-**Deliverables**
+Record your experimental findings and answer the following questions in your lab notes:
+
+**Deliverables checklist**
 - [ ] Completed `reach_env.py` and `dqn.py`.
 - [ ] `dqn_learning.png` from the main run, plus one learning-curve plot per ablation.
 - [ ] `arm_episode.png` and a one-sentence caption interpreting the path.
@@ -129,9 +131,9 @@ Honest note: the post-training showcase episode (`seed=123`, printed at the end)
 - **Q4 — Truncation ≠ termination.** `train` pushes `done=float(info["success"])`, NOT the loop's `done` flag. Explain the difference between the episode *ending because the robot succeeded* and *ending because time ran out*, and what would systematically break if timeouts were treated as terminals (hint: what value would the last 100-step states learn?).
 - **Q5 — Loss.** Why `smooth_l1_loss` (Huber) rather than MSE for the TD residual? What kind of TD outliers do you expect early in training?
 - **Q6 — Evaluation.** The eval estimates greedy success from 5 episodes (20% granularity) — explain the noisy line in your plot (e.g. 80% → 40%). Then discuss the seed-123 near-miss: is a 0.068 m final distance a policy failure, a threshold artefact, or a seed-lucky/unlucky draw? How would you make the evaluation statistically stronger?
-- **Q7 — Hardware.** If you ran both CPU and GPU (Colab T4 or local), report wall-clock for each and explain why a tiny DQN barely benefits from a GPU.
+- **Q7 — Hardware.** If you ran both CPU and GPU (Colab T4 or local), record wall-clock for each and explain why a tiny DQN barely benefits from a GPU.
 
-**Report rules:** as before — every claim checkable against a plot or log, seeds/commands stated, deviations reported.
+**Scientific rigor:** every claim checkable against a plot or log, seeds/commands stated, deviations recorded honestly.
 
 ---
 

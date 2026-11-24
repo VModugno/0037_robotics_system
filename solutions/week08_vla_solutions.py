@@ -208,7 +208,8 @@ def _evaluate_policy(ddpm, embedder, mu, sd, uses_vlm, args):
                 emb = embedder.embed_frames(frame)
                 cond = torch.cat([cond, torch.from_numpy(emb).float().to(ddpm.device)], dim=1)
             chunk = ddpm.sample(cond).view(dah.HORIZON, dah.ACT_DIM).cpu().numpy()
-            obs, *_ = env.step(chunk[0])
+            act = np.clip(chunk[0], -1.0, 1.0)
+            obs, *_ = env.step(act)
             if env._check_success():
                 success = True
                 break

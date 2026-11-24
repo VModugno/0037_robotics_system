@@ -73,7 +73,7 @@ Every TODO raises `NotImplementedError` with a pointer back here. Read the docst
 
 ## 4. Experiments
 
-Run, in order, and **keep the console output for your report**:
+Run, in order, and **keep the console output and logs for your lab notes**:
 
 1. `python mdp_formulation.py` — prints the map, one episode, and expected returns for the random and hand-crafted policies.
 2. `python bandits.py` — 8 agents × 1000 steps × 20 runs; saves `regret_comparison.png` and `optimal_action.png`.
@@ -112,14 +112,14 @@ expected return of hand-crafted policy: +0.179
 
 ---
 
-## 6. Report (deliverables & questions)
+## 6. Deliverables & Discussion Questions
 
-Write a short report (≤ 6 pages, PDF) with:
+Record your experimental results and answer the following questions in your lab notes:
 
-**Deliverables**
+**Deliverables checklist**
 - [ ] Your completed `mdp_formulation.py` and `bandits.py` (TODOs filled; no other changes).
-- [ ] `regret_comparison.png` and `optimal_action.png`, each referenced and discussed in the text.
-- [ ] Console output of the four experiment runs (append as listing or screenshots).
+- [ ] `regret_comparison.png` and `optimal_action.png` generated in `week01_bandits/`.
+- [ ] Console output of the four experiment runs.
 - [ ] Answers to Q1–Q8 below.
 - [ ] **Reproducibility block:** the exact commands you ran, the seeds used (defaults: MDP `seed=0`, bandits base seed 0), Python/NumPy versions, and whether you ran locally or on Colab.
 
@@ -133,7 +133,7 @@ Write a short report (≤ 6 pages, PDF) with:
 - **Q7 — Bench.** From your `--bench` runs: at which batch size does the GPU break even/win? Explain with per-step kernel-launch overhead vs per-element work. Report your own pulls/second numbers.
 - **Q8 — Vectorised.** Your T7 result (≈94.6) differs from the loop-based ε-greedy (≈93.69) with the *same* ε and horizon. Explain why (RNG consumption order: pre-sampled reward matrix vs sequential draws), and why both are unbiased estimates of the same quantity.
 
-**Report rules (apply every week):** every claim you make about a plot must be verifiable by looking at it; state seeds and commands; if a run failed or you deviated from the reference, say so and explain what you observed.
+**Scientific rigor:** every claim you make about a plot must be verifiable by looking at it; state seeds and commands; if a run failed or you deviated from the reference, say so and explain what you observed.
 
 ---
 

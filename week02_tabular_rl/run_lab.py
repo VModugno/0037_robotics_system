@@ -106,7 +106,7 @@ def main() -> None:
         _, rets = train(env_c, "q_learning", episodes=300, alpha=alpha,
                         gamma=1.0, epsilon=0.1, seed=3)
         print(f"{alpha:>8.1f} | {np.mean(rets[-100:]):>+20.1f}")
-    print("\n(Report Q3 asks you to explain the trend.)")
+    print("\n(Lab discussion question asks you to explain the trend.)")
 
 
 if __name__ == "__main__":

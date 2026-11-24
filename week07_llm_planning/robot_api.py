@@ -47,6 +47,27 @@ if os.name == "nt":
 
 import robosuite as suite
 from robosuite.controllers import load_composite_controller_config
+from robosuite.utils import binding_utils
+import mujoco
+
+# Defensive compatibility patch: compare MuJoCo joint types as plain ints so robosuite's
+# joint-address lookup does not raise an enum-comparison AssertionError (seen on Colab
+# when MuJoCo builds are mixed). Behaviour is identical on a clean MuJoCo 3.4 install.
+def _safe_get_joint_qpos_addr(self, name):
+    joint_id = self.joint_name2id(name)
+    joint_type = int(self.jnt_type[joint_id])
+    joint_addr = self.jnt_qposadr[joint_id]
+    ndim = 7 if joint_type == int(mujoco.mjtJoint.mjJNT_FREE) else (4 if joint_type == int(mujoco.mjtJoint.mjJNT_BALL) else 1)
+    return joint_addr if ndim == 1 else (joint_addr, joint_addr + ndim)
+binding_utils.MjModel.get_joint_qpos_addr = _safe_get_joint_qpos_addr
+
+def _safe_get_joint_qvel_addr(self, name):
+    joint_id = self.joint_name2id(name)
+    joint_type = int(self.jnt_type[joint_id])
+    joint_addr = self.jnt_dofadr[joint_id]
+    ndim = 6 if joint_type == int(mujoco.mjtJoint.mjJNT_FREE) else (3 if joint_type == int(mujoco.mjtJoint.mjJNT_BALL) else 1)
+    return joint_addr if ndim == 1 else (joint_addr, joint_addr + ndim)
+binding_utils.MjModel.get_joint_qvel_addr = _safe_get_joint_qvel_addr
 
 
 class RobotSkillAPI:

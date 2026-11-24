@@ -71,7 +71,7 @@ The TODOs follow the nanoVLM v0.1 recipe (Hugging Face's ~1k-line educational VL
   `+ self.pos` → blocks → norm.
 - **T2 `Projector.forward`** — pixel-shuffle the (B, 64, 192) patch grid 2×2 into
   (B, 16, 768) and project with `self.proj` to the LM width. Two lines. The *why*
-  is a report question: why not just an MLP on all 64 tokens?
+  is an analysis question: why not just an MLP on all 64 tokens?
 - **T3 `NanoVLM.forward_loss`** — concat `[image_prefix | text]`, build the attention
   mask (image prefix sees everything — image tokens never attend *causally*; text is
   causal), cross-entropy on text positions only. **Use a float mask (0 = visible,
@@ -148,16 +148,18 @@ If your VLM evaluates to ~0% with empty predictions, re-read the evaluate() docs
 prompts are generated **one at a time (B=1)**. Batch-generation with right-padded
 prompts produces only `<eos>` — the model never saw a target after `<pad>`.
 
-## 6. Report
+## 6. Deliverables & Discussion Questions
 
-Deliverables (check off):
+Record your experimental findings and answer the following questions in your lab notes:
+
+**Deliverables checklist**
 
 - [ ] `meta.json` + 1 caption file excerpt + per-phase caption counts (E1)
 - [ ] nanovlm training plot (train/val CE) + accuracy table incl. majority baselines
 - [ ] 30-vs-150-epoch diffusion comparison table (E2)
 - [ ] proprio vs +VLM eval table (E3)
 - [ ] E5 footgun write-up if you did it
-- [ ] commands + seeds + machine + wall-times for everything you report
+- [ ] commands + seeds + machine + wall-times for your runs
 
 Questions:
 

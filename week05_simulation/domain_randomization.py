@@ -116,6 +116,8 @@ def main():
     data.qpos = wp.array(qpos, dtype=wp.float32)
     mjw.forward(model, data)
 
+    init_angle = data.qpos[:, HINGE_DOF].numpy().copy()
+
     try:
         traj = run_randomized_rollout(model, data, args.steps, sample_every=10)
     except NotImplementedError as e:
@@ -123,7 +125,8 @@ def main():
         print("    complete T6 in domain_randomization.py, then re-run.")
         return 1
 
-    traj = np.asarray(traj)
+    # Prepend the true t=0 state so all curves visibly start from the identical initial angle (0.3 rad)
+    traj = np.asarray([init_angle] + list(traj))
     final = traj[-1]
     print(f"\ndomain randomization: {args.nworld} worlds, {args.steps} steps, seed {args.seed}")
     print(f"  hinge damping range   : {hinge_damping.min():.4f} .. {hinge_damping.max():.4f}")
@@ -131,19 +134,33 @@ def main():
     print(f"  pole angle at start   : mean {traj[0].mean():+.3f} rad, std {traj[0].std():.4f}")
     print(f"  pole angle at the end : mean {final.mean():+.3f} rad, std {final.std():.4f} rad")
     print("  -> same start, different physics: the std is the DR spread your")
-    print("     policy must be robust against (report both numbers).")
+    print("     policy must be robust against (record both numbers).")
 
-    plot_trajectories(traj, args.nworld, args.show)
+    plot_trajectories(
+        traj,
+        args.nworld,
+        args.show,
+        hinge_damping=hinge_damping,
+        floor_friction=floor_friction,
+    )
     return 0
 
 
-def plot_trajectories(traj, nworld, show):
+def plot_trajectories(traj, nworld, show, hinge_damping=None, floor_friction=None):
     import matplotlib.pyplot as plt
 
     t = np.arange(traj.shape[0]) * 10 * 0.01  # sample_every * timestep
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.2))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4.5))
+
     for w in range(nworld):
-        ax1.plot(t, traj[:, w], lw=0.8, alpha=0.6)
+        if hinge_damping is not None and floor_friction is not None and nworld <= 8:
+            lbl = f"w{w}: d={hinge_damping[w]:.3f}, f={floor_friction[w]:.2f}"
+            ax1.plot(t, traj[:, w], lw=1.2, alpha=0.85, label=lbl)
+        else:
+            ax1.plot(t, traj[:, w], lw=0.8, alpha=0.6)
+
+    if hinge_damping is not None and nworld <= 8:
+        ax1.legend(fontsize=7, loc="center right", framealpha=0.85)
     ax1.set_xlabel("time (s)")
     ax1.set_ylabel("pole angle (rad)")
     ax1.set_title(f"{nworld} randomized worlds, same start")

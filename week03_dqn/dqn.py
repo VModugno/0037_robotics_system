@@ -16,8 +16,8 @@ their inner mechanics.
 
 Run me:
     pixi run -e week03 python dqn.py --episodes 300
-    pixi run -e week03 python dqn.py --no-target-net   # ablation (report Q3)
-    pixi run -e week03 python dqn.py --small-buffer    # ablation (report Q3)
+    pixi run -e week03 python dqn.py --no-target-net   # ablation (discussion Q3)
+    pixi run -e week03 python dqn.py --small-buffer    # ablation (discussion Q3)
 
 Produces: dqn_learning.png, dqn_final.pt, arm_episode.png
 """
@@ -61,7 +61,7 @@ class ReplayBuffer:
     Stored in flat numpy arrays so `sample` is cheap. One entry:
         (obs[6], action, reward, next_obs[6], done)
     `done` is 1.0 ONLY for true terminal transitions (success) — time-limit
-    truncations must bootstrap (see train() and report Q4!).
+    truncations must bootstrap (see train() and discussion Q4!).
     """
 
     def __init__(self, capacity: int = 10_000, obs_dim: int = 6, seed: int = 0) -> None:
@@ -217,9 +217,9 @@ def main() -> None:
     ap.add_argument("--episodes", type=int, default=300)
     ap.add_argument("--device", default="auto", choices=["auto", "cpu", "cuda"])
     ap.add_argument("--no-target-net", action="store_true",
-                    help="ablation: freeze the target net at init, never sync it (report Q3)")
+                    help="ablation: freeze the target net at init, never sync it (discussion Q3)")
     ap.add_argument("--small-buffer", action="store_true",
-                    help="ablation: replay buffer of only 100 (report Q3)")
+                    help="ablation: replay buffer of only 100 (discussion Q3)")
     ap.add_argument("--show", action="store_true")
     args = ap.parse_args()
 

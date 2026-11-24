@@ -98,7 +98,7 @@ def decode_action(processor, model_output):
          document the mapping (e.g. translation/rotation/gripper dims),
       3. clip to [-1, 1].
     If the checkpoint's action space does NOT contain a compatible subset,
-    say so in your report -- that incompatibility is a real deployment
+    note this in your findings -- that incompatibility is a real deployment
     finding, not a bug in your code.
     """
     raise NotImplementedError("T13: model output -> env action (see docstring)")

@@ -37,6 +37,16 @@ def cartpole_model():
     Works with both the plain ``mujoco`` package (CPU) and, after
     ``mjw.put_model``, with MuJoCo Warp.
     """
+    import sys
+    if sys.platform.startswith("linux"):
+        import ctypes, glob
+        for p in sys.path:
+            for c in glob.glob(f"{p}/mujoco/libmujoco.so*"):
+                try:
+                    ctypes.CDLL(c, mode=ctypes.RTLD_GLOBAL)
+                except Exception:
+                    pass
+
     import mujoco
 
     return mujoco.MjModel.from_xml_string(MJCF_CARTPOLE)
