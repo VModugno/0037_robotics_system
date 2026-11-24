@@ -62,9 +62,10 @@ All modifications fall into four clean categories while **strictly preserving ev
 | `week08_vla/vlm_data.py` | Same defensive Robosuite `int(...)` joint-type compatibility shim. |
 | `week09_integration/pipeline.py` | Same defensive Robosuite `int(...)` joint-type compatibility shim. |
 
-### New Pedagogical File
+### New Pedagogical & Student Setup Files
 | File | Description |
 |:---|:---|
+| `COLAB_GUIDE.md` | Student-facing Google Colab setup & execution guide covering Weeks 01–09 (CPU/T4 GPU, split Cell 3A vs. Cell 3B for Week 05 MuJoCo Warp vs. Weeks 06–09 Robosuite 1.5.2, zero instructor `solutions/` references). |
 | `week06_lfd/ROBOT_CONTROL_PRIMER.md` | Short reference primer introducing 7-DoF Franka Panda `OSC_POSE` control, the 7-D action vector, and the 5-phase scripted grasping FSM. |
 
 ### Reference Solutions (`solutions/`)
@@ -73,4 +74,9 @@ All modifications fall into four clean categories while **strictly preserving ev
 | `solutions/week08_vla_solutions.py` | Added `np.clip(chunk[0], -1.0, 1.0)` in `_evaluate_policy` before stepping the Robosuite environment so DDPM-sampled actions always stay within actuator limits. |
 
 ---
+
+## 3. Verification Status
+
+- **Syntax check:** All modified Python files pass `py_compile` cleanly.
+- **Pedagogical integrity:** All student `TODO` blocks and `NotImplementedError` stubs remain untouched; no instructor-only course outlines or solutions instructions leak into `README.md` or `LAB.md`.
 
